@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            max-width: 300px;
+            height: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+            box-shadow: 2px 2px 5px #999;
+        }
+
+        .download-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .download-button button {
+            margin: 5px;
+            padding: 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: blue;
+            border: none;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>PDF Pages as Images</h1>
+    <div class="image-container">
+        {% for image in images %}
+            <div>
+                <img src="{{ url_for('send_pdf_image', filename=image) }}" alt="Extracted Image">
+                <div class="download-button">
+                    <a href="{{ url_for('download_img_pdf', filename=image) }}" target="_blank">
+                        <button>Download</button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

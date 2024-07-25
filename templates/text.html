@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 2px;
+        }
+
+        body p{
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            /* font-weight: 600; */
+        }
+    </style>
+</head>
+<body>
+    <p>
+        {{app|safe}}
+    </p>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            margin: 3px;
+        }
+
+        .container p {
+            margin: 2px;
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            /* font-weight: 600; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+            {{ app|replace('\n', '<br>')|safe }} <!--This is using replace filter fron Jinja2-->
+        </p>
+    </div>
+</body>
+</html>

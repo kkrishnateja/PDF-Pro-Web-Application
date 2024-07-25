@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Download Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .csv li a {
+            display: block;
+            text-decoration: none;
+            border-radius: 4px;
+            padding: 12px;
+            color: black;
+            background-color: #00ca22;
+            width: 150px;
+            margin: 0 20px;
+        }
+
+        .json li a {
+            display: block;
+            text-decoration: none;
+            border-radius: 4px;
+            padding: 12px;
+            color: black;
+            background-color: #0000ca;
+            width: 150px;
+            margin: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .flex{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Download Tables</h1>
+
+    <div class="flex">
+        <div class="csv">
+            <h2>CSV Files</h2>
+            {% if csv_files %}
+            <ul>
+                {% for file in csv_files %}
+                <li>
+                    <a href="{{ url_for('download', filename=file) }}">{{ file }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No CSV tables available.</p>
+            {% endif %}
+        </div>
+    
+        <div class="json">
+            <h2>JSON Files</h2>
+            {% if json_files %}
+            <ul>
+                {% for file in json_files %}
+                <li>
+                    <a href="{{ url_for('download', filename=file) }}">{{ file }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No JSON tables available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+ <div class="content">
+        <h2>Tables</h2>
+        {% for file, rows in csv_contents.items() %}
+        <h3>{{ file }}</h3>
+        <table>
+            {% for row in rows %}
+            <tr>
+                {% for col in row %}
+                <td>{{ col }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        {% endfor %}
+    </div>
+    
+</body>
+
+</html>
+

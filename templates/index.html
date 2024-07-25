@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Pro: Web Application</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .heading {
+            font-size: 22px;
+        }
+
+        .center {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkbox-list {
+            text-align: left;
+            margin-left: 30px;
+        }
+
+        .checkbox-list label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"] {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .file {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 50px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0026ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+    </style>
+    <script>
+        function handleCheckboxClick(clickedCheckbox) {
+            var checkboxes = document.querySelectorAll('.checkbox-list input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox !== clickedCheckbox) {
+                    checkbox.checked = false;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Upload a PDF file</h2>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <div class="file">
+            <input type="file" name="pdf_file" accept=".pdf" required>
+        </div>
+        <br><br>
+        <label class="heading">Select Processing Options</label>
+        <div class="center">
+            <div class="checkbox-list">
+                <label><input type="checkbox" name="extract_images" onclick="handleCheckboxClick(this)"> Extract Images</label>
+                <label><input type="checkbox" name="extract_text" onclick="handleCheckboxClick(this)"> Extract Text</label>
+                <label><input type="checkbox" name="extract_tables" onclick="handleCheckboxClick(this)"> Extract Tables</label>
+                <!-- <label><input type="checkbox" name="extract_links" onclick="handleCheckboxClick(this)"> Extract Links</label> -->
+                <label><input type="checkbox" name="pdftoimage" onclick="handleCheckboxClick(this)"> Convert Pages to Images</label>
+                <label><input type="checkbox" name="count_pages" onclick="handleCheckboxClick(this)"> Count Pages</label>
+            </div>
+        </div>
+
+        <input type="submit" value="Process PDF">
+    </form>
+</body>
+</html>
